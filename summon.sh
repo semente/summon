@@ -46,6 +46,9 @@ WEBSITE="https://github.com/semente/summon"
 AUTHOR="Guilherme Gondim"
 COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
 
+# internal use
+_LINK_METHOD=(--symbolic --relative)
+
 function print_version() {
     echo "$PROGNAME version $VERSION"
     echo "$COPYRIGHT"
@@ -75,7 +78,7 @@ function print_help() {
     echo
     echo " Options:"
     echo
-    echo "  -s                      make symbolic links instead of hard links"
+    echo "  -H                      make hard links instead of symbolic links"
     echo "  -b BACKUP-METHOD        choose between numbered (default), simple or off"
     echo "  -v                      verbose (i.e. give more information during processing)"
     echo "  -d                      print commands as they are executed (for debug)"
@@ -88,8 +91,8 @@ function print_help() {
 
 function message() {
     # pretty-print messages of arbitrary length
-    MESSAGE="$PROGNAME: $*"
-    echo "$MESSAGE" | fold -s -w ${COLUMNS:-80} >&2
+    local message="$PROGNAME: $*"
+    echo "$message" | fold -s -w ${COLUMNS:-80} >&2
 }
 
 function errormsg() {
@@ -101,10 +104,10 @@ function errormsg() {
 
 function parse_command_line() {
     local option backup_method
-    while getopts svdnVhb: option; do
+    while getopts HvdnVhb: option; do
         case $option in
-            s)                  # make symlinks
-                LN_ARGS+=(--symbolic --relative)
+            H)                  # make hard links
+                _LINK_METHOD=() # use hard links. ln default method
                 ;;
             v)                  # verbose
                 VERBOSE=1
@@ -156,13 +159,14 @@ function summon_file() {
         fi
     fi
 
-    ln --backup "${LN_ARGS[@]}" "$target" "$link_name"
+    ln --backup "${LN_ARGS[@]}" "${_LINK_METHOD[@]}" "$target" "$link_name"
 }
 
 function summon_dir() {
     # find dotfiles to be installed on target directory
 
-    target="$1"
+    local dotfiles
+    local target="$1"
 
     if [ -d "$target" ]; then
         (
