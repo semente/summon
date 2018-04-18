@@ -4,9 +4,9 @@ If you manage dozens of *dotfiles* in a Git repository **summon** can help you
 to setup them using the Unix-like systems symbolic link capability.
 
 If you are a [GNU Stow](https://www.gnu.org/software/stow/) user, this tool is
-for you! It shares basically the same concept with the key difference of not set
-up links to directories to avoid non-tracked files inside it pollute your Git
-repository.
+for you! It shares basically the same concept with the key difference of not
+setting up links to directories to avoid non-tracked files inside it pollute
+your Git repository.
 
 Although not tested on BSDs, Mac OS X, cygnus and the like, it should work fine
 in any machine with *GNU coreutils, findutils, diffutils and bash*
