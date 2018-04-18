@@ -1,19 +1,17 @@
 $ HOME=$(mktemp --suffix=-test-home.summon -d)
-$ cp summon.sh "$HOME"
-$ echo "default bashrc" > "$HOME"/.bashrc
-$ TEST_DATA_DIR=$(mktemp --suffix=-test-data.summon -d)
-$ cd "$TEST_DATA_DIR"
-$ mkdir -p bash emacs/.emacs.d
-$ echo "emacs" > emacs/.emacs.d/init.el
-$ echo "modified bashrc" > bash/.bashrc
-$ > A-FILE-TO-BE-IGNORED
-$ "$HOME"/summon.sh "$TEST_DATA_DIR"/bash
-$ "$HOME"/summon.sh -s "$TEST_DATA_DIR"/*
-$ stat -c %h -- "$HOME"/.bashrc
-2
-$ cat "$HOME"/.bashrc
+$ TEST_DATA=$(mktemp --suffix=-test-data.summon -d)
+$ cp summon.sh $HOME
+$ echo "default bashrc" > $HOME/.bashrc
+$ mkdir -p $TEST_DATA/bash $TEST_DATA/emacs/.emacs.d
+$ echo "emacs" > $TEST_DATA/emacs/.emacs.d/init.el
+$ echo "modified bashrc" > $TEST_DATA/bash/.bashrc
+$ touch $TEST_DATA/ignore
+$ $HOME/summon.sh -v "$TEST_DATA"/emacs #=> --eval echo "'$HOME/.emacs.d/init.el' -> '$(echo $TEST_DATA|sed s:^/tmp:../..:)/emacs/.emacs.d/init.el'"
+$ $HOME/summon.sh -vH "$TEST_DATA"/bash #=> --eval echo "'$HOME/.bashrc.~1~' ~ '$HOME/.bashrc' => './.bashrc'"
+$ rm "$HOME"/.bashrc "$HOME"/.emacs.d/init.el
+$ "$HOME"/summon.sh -v "$TEST_DATA"/* | grep "ignore"
+$ "$HOME"/summon.sh -Hv "$TEST_DATA"/* #=> --regex link is already created$
+$ test -L "$HOME"/.bashrc && cat "$HOME"/.bashrc
 modified bashrc
 $ test -L "$HOME"/.emacs.d/init.el && cat "$HOME"/.emacs.d/init.el
 emacs
-$ test -L "$HOME"/A-FILE-TO-BE-IGNORED && echo "Oops!"
-$ test -e "$HOME"/.bashrc.~1~ || echo "Oops!"
