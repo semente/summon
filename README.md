@@ -63,16 +63,16 @@ will result on this setup:
 $HOME
 ├── .config
 │   └── git
-│       └── gitk -> ~/src/dotfiles/git/.config/git/gitk
+│       └── gitk -> TARGET/git/.config/git/gitk
 ├── .emacs.d
-│   └── custom.el -> ~/src/dotfiles/emacs/.emacs.d/custom.el
-├── .gitconfig -> ~/src/dotfiles/git/.gitconfig
-├── .init.el -> ~/src/dotfiles/emacs/.init.el
+│   └── custom.el -> TARGET/emacs/.emacs.d/custom.el
+├── .gitconfig -> TARGET/git/.gitconfig
+├── .init.el -> TARGET/emacs/.init.el
 ├── .local
 │   └── bin
-│       ├── bandana -> ~/src/dotfiles/bin/.local/bin/bandana
-│       └── knife -> ~/src/dotfiles/bin/.local/bin/knife
-└── .tmux.conf -> ~/src/dotfiles/tmux/.tmux.conf
+│       ├── bandana -> TARGET/bin/.local/bin/bandana
+│       └── knife -> TARGET/bin/.local/bin/knife
+└── .tmux.conf -> TARGET/tmux/.tmux.conf
  ```
 
 (By default *summon* backup any existing file on the destination link path by
@@ -83,7 +83,7 @@ You may sort your dotfiles the way you wish. Some people has different setup
 from different hosts:
 
 ```
-~/src/dotfiles
+.
 ├── common
 │   └── vim
 │       └── .vimrc
