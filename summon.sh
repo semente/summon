@@ -106,8 +106,8 @@ function parse_command_line() {
     local option backup_method
     while getopts HvdnVhb: option; do
         case $option in
-            H)                  # make hard links
-                _LINK_METHOD=() # use hard links. ln default method
+            H)                  # use hard links
+                _LINK_METHOD=() # empty. ln default method is to use hard links
                 ;;
             v)                  # verbose
                 VERBOSE=1
@@ -155,7 +155,10 @@ function summon_file() {
     if [ -e "$link_name" ]; then
         hardlink_count="$(stat -c %h -- "$link_name")"
         if [ -L "$link_name" ] || [ "$hardlink_count" -gt 1 ]; then
-            cmp --quiet "$target" "$link_name" && return
+            cmp --quiet "$target" "$link_name" && {
+                test -n $VERBOSE && message "skipping ${link_name} - The link is already created"
+                return
+            }
         fi
     fi
 
@@ -163,7 +166,7 @@ function summon_file() {
 }
 
 function summon_dir() {
-    # find dotfiles to be installed on target directory
+    # Find dotfiles to be installed on target directory
 
     local dotfiles
     local target="$1"
