@@ -21,6 +21,7 @@ To run `summon` you must have the following software installed on your machine:
   - GNU coreutils (`dirname`, `ln`)
   - GNU findutils (`find`)
   - GNU diffutils (`cmp`)
+  - GNU sed (`sed`)
 
 ### Synopsis
 
