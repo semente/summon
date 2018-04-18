@@ -71,10 +71,12 @@ function print_help() {
     echo
     echo " Examples:"
     echo
-    echo "  summon \$HOME/src/dotfiles/*"
+    echo "  summon my-dotfiles"
+    echo "  summon dotfiles/zsh dotfiles/tmux"
+    echo "  summon dotfiles/*"
     echo "  summon dotfiles/$(hostname)/* dotfiles/common/*"
-    echo "  summon -s dotfiles/bash dotfiles/zsh  # use symlinks"
-    echo "  summon -b off dotfiles/work/*         # disable backups"
+    echo "  summon -H dotfiles/bash dotfiles/screen  # use hard links"
+    echo "  summon -b off dotfiles/work/*            # disable backups"
     echo
     echo " Options:"
     echo
