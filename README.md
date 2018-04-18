@@ -80,8 +80,8 @@ $HOME
 renaming it adding a numbered `~` suffix.)
 
 
-You may sort your dotfiles the way you wish. Some people has different setup
-from different hosts:
+You may sort your dotfiles the way you wish. Some people has different setup for
+different hosts:
 
 ```
 .
@@ -91,12 +91,9 @@ from different hosts:
 ├── laptop
 │   └── tmux
 │       └── .tmux.conf
-├── remote
-│   └── tmux
-│       └── .tmux.conf
 └── somehost
-    └── vim
-        └── .vimrc
+    └── tmux
+        └── .tmux.conf
 ```
 
 **Using hard instead symbolic links**
