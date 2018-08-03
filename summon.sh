@@ -3,7 +3,7 @@
 #
 # Copyright (C) 2018 Guilherme Gondim
 #
-# Website: https://github.com/semente/summon
+# Website: https://gitlab.com/semente/summon
 # Keywords: dotfiles, cli, bash
 #
 # This program is free software: you can redistribute it and/or modify
