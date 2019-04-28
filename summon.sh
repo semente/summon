@@ -28,7 +28,7 @@ set -u
 
 # meta data
 readonly PROGNAME=summon
-readonly VERSION="0.1"
+readonly VERSION="0.2"
 readonly WEBSITE="https://github.com/semente/summon"
 readonly AUTHOR="Guilherme Gondim"
 readonly COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
