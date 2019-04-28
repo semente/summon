@@ -20,8 +20,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# exit on error
+# exit on first error
 set -e
+
+# meta data
+readonly PROGNAME=summon
+readonly VERSION="0.1"
+readonly WEBSITE="https://github.com/semente/summon"
+readonly AUTHOR="Guilherme Gondim"
+readonly COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
 
 # default settings
 VERSION_CONTROL=numbered
@@ -38,13 +45,6 @@ for summonrc in ".summonrc" "${XDG_CONFIG_HOME:-${HOME}/.config/summon/summonrc}
 done
 
 export VERSION_CONTROL          # see ln(1) manpage
-
-# meta data
-PROGNAME=summon
-VERSION="0.1"
-WEBSITE="https://github.com/semente/summon"
-AUTHOR="Guilherme Gondim"
-COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
 
 # internal use
 _LINK_METHOD=(--symbolic --relative)
