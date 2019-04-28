@@ -23,6 +23,9 @@
 # exit on first error
 set -e
 
+# exit when an undefined variable is accessed
+set -u
+
 # meta data
 readonly PROGNAME=summon
 readonly VERSION="0.1"
