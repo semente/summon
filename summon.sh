@@ -108,8 +108,14 @@ function parse_command_line() {
     local option backup_method
     while getopts HvdnVhb: option; do
         case $option in
-            H)                  # use hard links
-                _LINK_METHOD=() # empty. ln default method is to use hard links
+            h)                  # help
+                print_help && exit
+                ;;
+            -)                  # hack to make --help work
+                print_help && exit
+                ;;
+            H)                  # to use hard links
+                _LINK_METHOD=() # (the `ln' default link method is hard links)
                 ;;
             v)                  # verbose
                 VERBOSE=1
@@ -124,9 +130,6 @@ function parse_command_line() {
                 ;;
             V)                  # version
                 print_version && exit
-                ;;
-            h)                  # help
-                print_help && exit
                 ;;
             b)                  # backup method
                 backup_method="$OPTARG"
