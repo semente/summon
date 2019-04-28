@@ -36,7 +36,7 @@ LN_ARGS=()
 
 # load custom settings
 # XXX: undocumented; use carefully
-for summonrc in ".summonrc" "${XDG_CONFIG_HOME:-${HOME}/.config/summon/summonrc}" "${HOME}/.summonrc"; do
+for summonrc in ".summonrc" "${XDG_CONFIG_HOME:-${HOME}/.config}/summon/summonrc" "${HOME}/.summonrc"; do
     if [ -f "$summonrc" ]; then
         # shellcheck source=/dev/null
         source "$summonrc"
