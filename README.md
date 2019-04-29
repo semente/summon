@@ -3,9 +3,26 @@
 If you manage dozens of *dotfiles* in a Git repository **summon** can help you
 to setup them using the Unix-like systems symbolic link capability.
 
-[GNU Stow](https://www.gnu.org/software/stow/) users: summon shares basically
-the same concept with the key difference of not setting up links to directories
-to avoid non-tracked files inside it pollute your Git repository.
+[GNU Stow](https://www.gnu.org/software/stow/) users: `summon' shares basically
+the same concept as Stow but with some key differences that are more suitable to
+the deploy of *dotfiles*, which includes:
+
+  - do not set up links to directories like in Stow to avoid non-tracked files
+    inside it pollute your Git repository---it creates the needed directories in
+    advance;
+
+  - always install the *dotfiles* in `$HOME` instead the parent directory as by
+    default in Stow;
+
+  - (backup and) override existing targets by default, instead to exit with an
+    error;
+
+  - support hard links for special cases. Some software won't work properly with
+    *symlinks*.
+
+`summon` will never delete anything, instead it back up any existing file on the
+destination link path by renaming it adding a numbered `~` suffix.
+
 
 ## Usage
 
