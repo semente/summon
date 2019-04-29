@@ -28,7 +28,7 @@ set -u
 
 # meta data
 readonly PROGNAME=summon
-readonly VERSION="0.2.1"
+readonly VERSION="0.2.2"
 readonly WEBSITE="https://github.com/semente/summon"
 readonly AUTHOR="Guilherme Gondim"
 readonly COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
@@ -165,7 +165,7 @@ function summon_file() {
         hardlink_count="$(stat -c %h -- "$link_name")"
         if [ -L "$link_name" ] || [ "$hardlink_count" -gt 1 ]; then
             cmp --quiet "$target" "$link_name" && {
-                test ${VERBOSE} -eq 1 && message "skipping ${link_name} - The link is already created"
+                test ${VERBOSE} -eq 1 && message "skipping ${link_name} - The link is already created" || true
                 return
             }
         fi
