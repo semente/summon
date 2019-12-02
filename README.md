@@ -3,7 +3,7 @@
 If you manage dozens of *dotfiles* in a Git repository **summon** can help you
 to setup them using the Unix-like systems symbolic link capability.
 
-[GNU Stow](https://www.gnu.org/software/stow/) users: `summon' shares basically
+[GNU Stow](https://www.gnu.org/software/stow/) users: `summon` shares basically
 the same concept as Stow but with some key differences that are more suitable to
 the deploy of *dotfiles*, which includes:
 
