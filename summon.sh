@@ -28,7 +28,7 @@ set -u
 
 # meta data
 readonly PROGNAME=summon
-readonly VERSION="0.2.2"
+readonly VERSION="0.2.3"
 readonly WEBSITE="https://github.com/semente/summon"
 readonly AUTHOR="Guilherme Gondim"
 readonly COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
@@ -186,7 +186,7 @@ function summon_dir() {
             cd "$target"
             
             # make missing target directories in advance
-            find . \( -path "*/.git" -o -path "*/.stversions" \) -prune -o -type d \
+            find . \( -path ".git" -o -path ".gitignore" -o -path "*/.git" -o -path "*/.stversions" \) -prune -o -type d \
                 | sed "s:^\.:$HOME:g" \
                 | xargs mkdir -p
             
