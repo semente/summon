@@ -1,7 +1,7 @@
 #!/bin/bash
 ## summon --- assemble user config files (aka dotfiles) on Unix-like systems
 #
-# Copyright (C) 2018 Guilherme Gondim
+# Copyright (C) 2018-2021 Guilherme Semente
 #
 # Website: https://gitlab.com/semente/summon
 # Keywords: dotfiles, cli, bash
@@ -28,10 +28,10 @@ set -u
 
 # meta data
 readonly PROGNAME=summon
-readonly VERSION="0.2.3"
 readonly WEBSITE="https://github.com/semente/summon"
-readonly AUTHOR="Guilherme Gondim"
-readonly COPYRIGHT="Copyright (C) 2018 by $AUTHOR"
+readonly VERSION="0.2.4"
+readonly AUTHOR="Guilherme Semente"
+readonly COPYRIGHT="Copyright (C) 2018-2020 by $AUTHOR"
 
 # default settings
 VERBOSE=0
@@ -186,11 +186,13 @@ function summon_dir() {
             cd "$target"
             
             # make missing target directories in advance
-            find . \( -path ".git" -o -path ".gitignore" -o -path "*/.git" -o -path "*/.stversions" \) -prune -o -type d \
+            find . -type d \
+                | grep -Ev "^./.(git|hg|stversions)" \
                 | sed "s:^\.:$HOME:g" \
                 | xargs mkdir -p
-            
-            dotfiles=$(find . \( -name "*~" -o -name "#*" \) -prune -o -type f)
+
+            dotfiles=$(find ./ -type f ! -name "*~" ! -name "#*" ! -name ".gitignore" ! -name ".hgignore")
+            dotfiles=$(grep -Ev "^./.(git|hg|stversions)/" <<< "${dotfiles}")
             for dotfile in $dotfiles; do
                  summon_file "$dotfile"
             done
